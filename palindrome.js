@@ -1,3 +1,5 @@
+module.exports = Phrase;
+
 String.prototype.reverse = function() {
   return Array.from(this).reverse().join("");
 }
@@ -18,20 +20,26 @@ function Phrase(content) {
   }
 
   this.processedContent = function processedContent() {
-    return this.processor(this.content);
+    return this.processor(this.letters());
   }
 
   this.letters = function letters() {
-    return this.content;
+    const lettersRegex = /[a-z]/gi;
+    return (this.content.match(lettersRegex) || []).join("");
   }
 
   this.palindrome = function palindrome() {
-    return this.processedContent() === this.processedContent().reverse();
+    if( this.processedContent() ) {
+      return this.processedContent() === this.processedContent().reverse();
+    } else {
+      return false;
+    }
   }
+
   this.louder = function louder() {
     return this.content = this.content.toUpperCase();
-  };
-}
+  }
+};
 
 function TranslatedPhrase(content, translation) {
   this.content = content;
