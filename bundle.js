@@ -30,7 +30,11 @@ function Phrase(content) {
   }
 
   this.palindrome = function palindrome() {
-    return this.processedContent() === this.processedContent().reverse();
+    if( this.processedContent() ) {
+      return this.processedContent() === this.processedContent().reverse();
+    } else {
+      return false;
+    }
   }
 
   this.louder = function louder() {
